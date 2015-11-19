@@ -38,9 +38,10 @@ type Configuration struct {
 	MailPort     int      `"json:MailPort"`
 	MailUsername string   `"json:MailUsername"`
 	MailPassword string   `"json:MailPassword"`
+	Client       string   `"json:Client"`
 }
 
-func LoadConfiguration() (Configuration, error) {
+func LoadConfiguration() (*Configuration, error) {
 	var (
 		appName string
 		config  Configuration
@@ -50,10 +51,10 @@ func LoadConfiguration() (Configuration, error) {
 
 	data, err := ioutil.ReadFile(appName)
 	if err != nil {
-		return Configuration{}, err
+		return nil, err
 	}
-	if err = json.Unmarshal(data, &config); err != nil {
-		return Configuration{}, err
+	if err = json.Unmarshal(data, config); err != nil {
+		return nil, err
 	}
 
 	return config, nil
