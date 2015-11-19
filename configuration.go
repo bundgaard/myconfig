@@ -51,10 +51,10 @@ func LoadConfiguration() (Configuration, error) {
 
 	data, err := ioutil.ReadFile(appName)
 	if err != nil {
-		return nil, err
+		return Configuration{}, err
 	}
 	if err = json.Unmarshal(data, config); err != nil {
-		return nil, err
+		return Configuration{}, err
 	}
 
 	return config, nil
