@@ -29,7 +29,7 @@ func Sendmail(c Configuration, lowerSecurity bool) error {
 		msg.SetBody("text/plain", c.Body)
 		msg.Attach(c.Filename)
 
-		d := gomail.NewPlainDialer(c.MaiHost, c.MailPort, c.MailUsername, c.MailPassword)
+		d := gomail.NewPlainDialer(c.MailHost, c.MailPort, c.MailUsername, c.MailPassword)
 
 		if lowerSecurity {
 			d.TLSConfig = &tls.Config{InsecureSkipVerify: true}

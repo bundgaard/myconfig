@@ -34,28 +34,27 @@ type Configuration struct {
 	Monthly      bool     `"json:Monthly"`
 	Daily        bool     `"json:Daily"`
 	SQLFile      string   `"json:SQLFile"`
-	MaiHost      string   `"json:MailHost"`
+	MailHost     string   `"json:MailHost"`
 	MailPort     int      `"json:MailPort"`
 	MailUsername string   `"json:MailUsername"`
 	MailPassword string   `"json:MailPassword"`
 	Client       string   `"json:Client"`
 }
 
-func LoadConfiguration() (Configuration, error) {
+func (config *Configuration) LoadConfiguration() (err error) {
 	var (
 		appName string
-		config  Configuration
 	)
 
 	appName = fmt.Sprintf("%s.json", os.Args[0])
 
 	data, err := ioutil.ReadFile(appName)
 	if err != nil {
-		return Configuration{}, err
+		return err
 	}
-	if err = json.Unmarshal(data, config); err != nil {
-		return Configuration{}, err
+	if err = json.Unmarshal(data, &config); err != nil {
+		return err
 	}
 
-	return config, nil
+	return nil
 }
