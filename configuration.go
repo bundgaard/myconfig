@@ -41,7 +41,7 @@ type Configuration struct {
 	Client       string   `"json:Client"`
 }
 
-func LoadConfiguration() (*Configuration, error) {
+func LoadConfiguration() (Configuration, error) {
 	var (
 		appName string
 		config  Configuration
